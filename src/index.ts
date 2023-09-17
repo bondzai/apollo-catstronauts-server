@@ -1,18 +1,14 @@
-const { ApolloServer } = require('@apollo/server');
-const { startStandaloneServer } = require('@apollo/server/standalone');
-
-const typeDefs = require('./schema');
-const resolvers = require('./resolvers');
-
-const TrackAPI = require('./datasources/track-api');
+import { ApolloServer } from "@apollo/server";
+import { startStandaloneServer } from "@apollo/server/standalone";
+import { typeDefs } from "./schema";
+import { resolvers } from "./resolvers";
+import { TrackAPI } from "./datasources/track-api";
 
 async function startApolloServer() {
   const server = new ApolloServer({ typeDefs, resolvers });
-
   const { url } = await startStandaloneServer(server, {
     context: async () => {
       const { cache } = server;
-
       return {
         dataSources: {
           trackAPI: new TrackAPI({ cache }),
@@ -20,9 +16,8 @@ async function startApolloServer() {
       };
     },
   });
-
   console.log(`
-    🚀  Server is running
+    🚀  Server is running!
     📭  Query at ${url}
   `);
 }

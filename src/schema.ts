@@ -1,6 +1,6 @@
-const gql = require('graphql-tag');
+import gql from "graphql-tag";
 
-const typeDefs = gql`
+export const typeDefs = gql`
   type Query {
     "Query to get tracks array for the homepage grid"
     tracksForHome: [Track!]!
@@ -16,12 +16,12 @@ const typeDefs = gql`
 
   type IncrementTrackViewsResponse {
     "Similar to HTTP status code, represents the status of the mutation"
-    code: ID!
+    code: Int!
     "Indicates whether the mutation was successful"
     success: Boolean!
-    "Human readable message for the UI"
+    "Human-readable message for the UI"
     message: String!
-    "Newly updated track after a succesful mutation"
+    "Newly updated track after a successful mutation"
     track: Track
   }
 
@@ -68,5 +68,3 @@ const typeDefs = gql`
     videoUrl: String
   }
 `;
-
-module.exports = typeDefs;
